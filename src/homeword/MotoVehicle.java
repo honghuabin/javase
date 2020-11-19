@@ -9,5 +9,5 @@ public abstract class MotoVehicle {
     int price;      // 价格
 
     // 根据天数计算价格
-    abstract int CalcRent(int days);
+    abstract int calcRent(int days);
 }

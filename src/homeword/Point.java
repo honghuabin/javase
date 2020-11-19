@@ -1,4 +1,4 @@
-package cls;
+package homeword;
 
 /*
     点 对象示例

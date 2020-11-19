@@ -1,4 +1,4 @@
-package cls;
+package homeword;
 
 import java.util.Scanner;
 

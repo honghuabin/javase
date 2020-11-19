@@ -22,7 +22,7 @@ public class CodeBlockDemo {
     {
         System.out.println("这里是构造代码块，会在new的时候执行" +
                 "编译的时候，这里的所有代码都会在自动加入到每个构造方法的最前面");
-        this.name="123";
+        this.name=".gitignore";
         System.out.println("当构造方法里面进行嵌套构造方法(使用了this())，" +
                 "那么使用this()的这个构造方法不会添加构造代码块的代码");
     }

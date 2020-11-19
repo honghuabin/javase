@@ -25,7 +25,7 @@ public class Bus extends MotoVehicle{
     }
 
     @Override
-    public int CalcRent(int days){
+    public int calcRent(int days){
         return price * days;
     }
 }

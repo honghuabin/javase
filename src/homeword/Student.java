@@ -1,4 +1,4 @@
-package cls;
+package homeword;
 
 public class Student {
     String name;
@@ -30,7 +30,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "cls.Student{" +
+        return "homeword.Student{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';

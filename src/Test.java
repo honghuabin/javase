@@ -1,4 +1,4 @@
-import cls.Student;
+import homeword.Student;
 
 import java.util.Arrays;
 
