@@ -29,6 +29,7 @@ public class Person {
     }
 
     void test1(){
-        System.out.println("我就看看我能不能被继承");
+        System.out.println("我就看看我能不能被继承，结果发现可以被继承");
+        System.out.println("如果子类与我不在同一个包，就不能被继承");
     }
 }
