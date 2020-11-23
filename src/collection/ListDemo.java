@@ -1,6 +1,8 @@
 package collection;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 /*
@@ -8,10 +10,36 @@ import java.util.LinkedList;
         ArrayList
         LinkedList
  */
-public class ListDemo {
+public class ListDemo implements Comparator<Staff> {
     public static void main(String[] args) {
 //        demoArrayList();
-        demoLinkedList();
+//        demoLinkedList();
+        
+        demoListSort();
+    }
+
+    /*
+        向list中添加对象，然后根据年龄排序
+     */
+    private static void demoListSort() {
+        ArrayList<Staff> staff = new ArrayList<>();
+
+        staff.add(new Staff("李默文",22,"1002"));
+        staff.add(new Staff("王小华",20,"1001"));
+        staff.add(new Staff("张一慢",24,"1003"));
+        System.out.println(staff);
+
+        Collections.sort(staff);
+        System.out.println(staff);
+        System.out.println("-----------------------");
+
+        ArrayList<Staff> staff1 = new ArrayList<>();
+
+        staff1.add(new Staff("李默文1",22,"1002"));
+        staff1.add(new Staff("王小华1",20,"1001"));
+        staff1.add(new Staff("张一慢1",24,"1003"));
+        Collections.sort(staff1, new ListDemo());
+        System.out.println(staff1);
     }
 
     /*
@@ -94,5 +122,14 @@ public class ListDemo {
         linkedList.set(2, "set");
         System.out.println(linkedList);
 
+    }
+
+    @Override
+    public int compare(Staff o1, Staff o2) {
+        System.out.println("==========");
+        System.out.println(o1);
+        System.out.println(o2);
+        System.out.println("==========");
+        return o1.getAge() - o2.getAge();
     }
 }
