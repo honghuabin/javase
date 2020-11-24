@@ -6,9 +6,9 @@ import java.util.Iterator;
 
 public class HashSetDemo {
     public static void main(String[] args) {
-//        demo01();
+        demo01();
 
-        demo02();
+//        demo02();
     }
 
     private static void demo01(){
