@@ -1,4 +1,4 @@
-package homeword;
+package homeword.collection;
 
 /**
  * Dog

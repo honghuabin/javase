@@ -1,4 +1,4 @@
-package homeword;
+package homeword.collection;
 
 import java.util.ArrayList;
 import java.util.Iterator;

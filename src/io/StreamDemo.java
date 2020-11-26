@@ -4,12 +4,37 @@ import java.io.*;
 /*
     字节输入流
  */
-public class InputStreamDemo {
+public class StreamDemo {
     public static void main(String[] args) {
-        demoOutputStream01();
-        demoInputStream01();
+//        demoOutputStream01();
+//        demoInputStream01();
         
-        demoCopyContent01();
+//        demoCopyContent01();
+
+        demoByteArrayInputStream();
+    }
+
+    /*
+        字节操作输入流
+     */
+    private static void demoByteArrayInputStream() {
+        ByteArrayInputStream byteArrayInputStream = null;
+        try {
+            byteArrayInputStream = new ByteArrayInputStream(new FileInputStream("test.txt").readAllBytes());
+            byte[] bytes = new byte[1024];
+            int len = 0;
+            while ((len = byteArrayInputStream.read(bytes)) != -1){
+                System.out.println(new String(bytes, 0 , len));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                byteArrayInputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /*
