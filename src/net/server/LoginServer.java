@@ -92,18 +92,24 @@ public class LoginServer {
     /*
         采用多线程方法
      */
-    private void threadMethod(){
-        new Thread(new clientThread()).start();
+    private void threadMethod() throws IOException {
+        Socket client = serverSocket.accept();
+        System.out.println("客户端连接");
+        new Thread(new clientThread(client)).start();
     }
 
     /*
         内中类的方式来写多线程
      */
     class clientThread implements Runnable{
+        private Socket client;
+        public clientThread(Socket client){
+            this.client = client;
+        }
+
         @Override
         public void run(){
             // 获取客户端连接
-            Socket client = null;
             InputStream inputStream = null;
             OutputStream outputStream = null;
             ObjectInputStream objectInputStream = null;
@@ -112,7 +118,7 @@ public class LoginServer {
             // 初始化登录结果
             ApiResult apiResult = new ApiResult(0,"登录失败");
             try {
-                client = serverSocket.accept();
+//                client = serverSocket.accept();
                 // 获取客户端输入流
                 inputStream = client.getInputStream();
                 // 获取客户端输出流
@@ -144,6 +150,7 @@ public class LoginServer {
                 e.printStackTrace();
                 apiResult.setMsg(e.getMessage());
             } finally {
+                System.out.println("客户端断开连接");
                 // 释放资源
                 try {
                     objectOutputStream.close();
