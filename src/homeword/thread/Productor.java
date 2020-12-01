@@ -1,6 +1,7 @@
 package homeword.thread;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
 
 /*
     生产者每天生产10个，库存最大存量为200个
@@ -9,28 +10,21 @@ public class Productor implements Runnable{
     // 最大库存量
     private int max_num = 200;
     // 商品库存
-    ArrayList<Integer> goodsArrayList;
-    // 商品数量
-    Integer num;
+    LinkedList<Integer> goodsList;
 
-    Productor(ArrayList<Integer> goodsArrayList){
-        this.goodsArrayList = goodsArrayList;
-    }
-
-    Productor(Integer num){
-        this.num = num;
+    Productor(LinkedList<Integer> goodsList){
+        this.goodsList = goodsList;
     }
 
     @Override
     public void run(){
         while (true) {
-            /*
-            synchronized (goodsArrayList) {
+            synchronized (goodsList) {
                 // 每次被唤醒的时候，都需要判断库存情况
                 // 判断是否超过库存了
-                if (goodsArrayList.size() >= max_num) {
+                if (goodsList.size() >= max_num) {
                     try {
-                        goodsArrayList.wait();
+                        goodsList.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -39,40 +33,18 @@ public class Productor implements Runnable{
 
                 // 库存不够，生产者生产
                 // 定义一天生产的个数
-                int num = max_num - goodsArrayList.size() > 10 ? 10 : (max_num - goodsArrayList.size());
+                int num = max_num - goodsList.size() > 10 ? 10 : (max_num - goodsList.size());
                 for (int i = 0; i < num; i++) {
-                    goodsArrayList.add(1);
+                    goodsList.add(1);
                 }
-                System.out.println(Thread.currentThread().getName() + " 生产商品" + num + "个，商品当前库存：" + goodsArrayList.size());
+                System.out.println(Thread.currentThread().getName() + " 生产商品" + num + "个，商品当前库存：" + goodsList.size());
 
                 // 通知消费者进行购买
-                goodsArrayList.notifyAll();
-            }
-            */
-
-            synchronized(num){
-                if (num >= max_num) {
-                    try {
-                        num.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(Thread.currentThread().getName() + " 被唤醒");
-                }
-
-                // 库存不够，生产者生产
-                // 定义一天生产的个数
-                int add = max_num - num > 10 ? 10 : (max_num - num);
-                num += add;
-                System.out.println(Thread.currentThread().getName() + " 生产商品" + add + "个，商品当前库存：" + num);
-
-                // 通知消费者进行购买
-                num.notifyAll();
+                goodsList.notifyAll();
             }
 
-            // 间隔一秒在生产
             try {
-                Thread.sleep(1000);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

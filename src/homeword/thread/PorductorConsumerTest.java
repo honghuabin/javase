@@ -1,6 +1,6 @@
 package homeword.thread;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /*
     生产者一天生产10个，最多库存200个
@@ -15,13 +15,11 @@ public class PorductorConsumerTest {
 
     private static void method01() {
         // 创建商品
-        ArrayList<Integer> goodsList = new ArrayList<Integer>();
+        LinkedList<Integer> goodsList = new LinkedList<Integer>();
         // 生产者开始运行
         new Thread(new Productor(goodsList),"生产者").start();
-//        new Thread(new Productor(goodsList),"生产者").start();
         // 500个消费者开始购买
         for (int i = 0; i < 500 ; i++){
-//            new Thread(new Consumer(goodsList),"消费者 - " + i).start();
             new Thread(new Consumer(goodsList),"消费者 - " + i).start();
         }
 
